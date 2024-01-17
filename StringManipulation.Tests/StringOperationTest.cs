@@ -43,5 +43,52 @@ namespace StringManipulation.Tests
 
             Assert.False(result);    //  False(result) -> Valida que la funcion retorne False
         }
+
+        [Fact]
+        public void RemoveWhitespace()
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.RemoveWhitespace("Hello World!");
+
+            Assert.Equal("HelloWorld!", result);
+        }
+
+        [Fact]
+        public void QuantintyInWords()
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.QuantintyInWords("cat", 10);
+
+            Assert.StartsWith("diez", result);    //  StartsWith("chars", stringEvaluated) -> Comprueba que stringEvaluated inicie con una combinación de caracteres en especifico (chars)
+            Assert.Contains("cat", result);       //  Contains("chars", stringEvaluated) -> Comprueba que stringEvaluated contenga "chars" en alguna parte (no importa donde, como un '%LIKE%'
+        }
+
+        [Fact]
+        public void GetStringLength()
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.GetStringLength("12345");
+
+            Assert.Equal(5, result);
+        }
+
+        [Fact]
+        public void GetStringLength_Exception()
+        {
+            var strOperations = new StringOperations();
+
+            Assert.ThrowsAny<ArgumentNullException>(() => strOperations.GetStringLength(null)); //  ThrowsAny<Exception>(() => object.method()) -> Verifica que el metodo arroje una excepcion
+        }
+
+        [Fact]
+        public void TruncateString_Exception()
+        {
+            var strOperations = new StringOperations();
+
+            Assert.ThrowsAny<ArgumentOutOfRangeException>(() => strOperations.TruncateString("abc", -1));
+        }
     }
 }
