@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Humanizer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace StringManipulation.Tests
             Assert.Equal("Hello World!", result);   //  Equal(expectedResult, result) -> Permite enviar un resultado esperado para un metodo y el resultado real devuelto por el metodo para evaluar si ambos son iguales
         }
 
+        /*
         [Fact]
         public void IsPalindrome_True()
         {
@@ -43,6 +45,7 @@ namespace StringManipulation.Tests
 
             Assert.False(result);    //  False(result) -> Valida que la funcion retorne False
         }
+        */
 
         [Fact]
         public void RemoveWhitespace()
@@ -54,6 +57,7 @@ namespace StringManipulation.Tests
             Assert.Equal("HelloWorld!", result);
         }
 
+        /*
         [Fact]
         public void QuantintyInWords()
         {
@@ -64,6 +68,7 @@ namespace StringManipulation.Tests
             Assert.StartsWith("diez", result);    //  StartsWith("chars", stringEvaluated) -> Comprueba que stringEvaluated inicie con una combinación de caracteres en especifico (chars)
             Assert.Contains("cat", result);       //  Contains("chars", stringEvaluated) -> Comprueba que stringEvaluated contenga "chars" en alguna parte (no importa donde, como un '%LIKE%'
         }
+        */
 
         [Fact]
         public void GetStringLength()
@@ -89,6 +94,43 @@ namespace StringManipulation.Tests
             var strOperations = new StringOperations();
 
             Assert.ThrowsAny<ArgumentOutOfRangeException>(() => strOperations.TruncateString("abc", -1));
+        }
+
+        [Theory]    //  [Theory] -> Especifica que la prueba será ejecutada con diferentes escenarios (mediante la recepcion de parametros)
+        [InlineData("V", 5)]    //  [InlineData(attributes... )] -> Configura atributos de entrada para diferentes escenarios en una prueba [Theory]
+        [InlineData("III", 3)]
+        [InlineData("X", 10)]
+        public void FromRomanToNumber(string romanNumber, int expected)
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.FromRomanToNumber(romanNumber);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("carro", 7, "siete carros")]
+        [InlineData("camion", 10, "diez camions")]
+        public void QuantintyInWords(string input, int quiantity, string expected)
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.QuantintyInWords(input, quiantity);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("ama", true)]
+        [InlineData("mamá", false)]
+        public void IsPalindrome(string input, bool expected)
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.IsPalindrome(input);
+
+            Assert.Equal(expected, result);
         }
     }
 }
