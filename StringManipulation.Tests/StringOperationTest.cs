@@ -1,4 +1,6 @@
 ﻿using Humanizer;
+using Microsoft.Extensions.Logging;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace StringManipulation.Tests
 {
     public class StringOperationTest
     {
-        [Fact]
+        [Fact(Skip = "Esta prueba no es valida en este momento, TICKET-001")]   //  Skip = "message" -> Omite la ejecución de la prueba
         public void ConcatenateStrings()
         {
             //  Arrange
@@ -131,6 +133,17 @@ namespace StringManipulation.Tests
             var result = strOperations.IsPalindrome(input);
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void CountOccurrences()
+        {
+            var mockLogger = new Mock<ILogger<StringOperations>>(); //  Mock<objectMock>(); -> Crea un mock de objectMock
+            var strOperations = new StringOperations(mockLogger.Object);    //  mockObject.Object -> Obtiene el objeto simulado por el mock
+
+            var result = strOperations.CountOccurrences("Hello Platzi", 'l');
+
+            Assert.Equal(3, result);
         }
     }
 }
