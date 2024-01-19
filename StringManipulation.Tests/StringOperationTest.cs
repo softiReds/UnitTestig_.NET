@@ -145,5 +145,19 @@ namespace StringManipulation.Tests
 
             Assert.Equal(3, result);
         }
+
+        [Fact]
+        public void ReadFile()
+        {
+            var strOperations = new StringOperations();
+            var mockFileReader = new Mock<IFileReaderConector>();
+
+            //  mockFileReader.Setup(p => p.ReadString("file.txt")).Returns("Reading file");  //  Setup(p => p.Method()).Returns(valueToReturn) -> Permite configurar funciones para un mock especificando lo que deben retornar
+            mockFileReader.Setup(p => p.ReadString(It.IsAny<string>())).Returns("Reading file");    //  It.IsAny<dataType>() -> Especifica que el parametro recibido puede tener cualquier valor, siempre y cuando sea del tipo dataType
+
+            var result = strOperations.ReadFile(mockFileReader.Object, "asdfasdfadsf.txt");
+
+            Assert.Equal("Reading file", result);
+        }
     }
 }
