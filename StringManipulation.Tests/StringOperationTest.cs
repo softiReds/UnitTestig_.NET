@@ -110,9 +110,7 @@ namespace StringManipulation.Tests
 
         [Theory]
         [InlineData(null, 1, null)]
-        [InlineData("Hello", 3, "Hel")]
-        [InlineData("Hello", 10, "Hello")]
-        public void TruncateString_NullMaxLength(string input, int maxLength, string expected)
+        public void TruncateString_Null(string input, int maxLength, string expected)
         {
             var strOperations = new StringOperations();
 
@@ -122,7 +120,6 @@ namespace StringManipulation.Tests
         }
 
         [Theory]
-        [InlineData("Hello", 3, "Hel")]
         [InlineData("Hello", 10, "Hello")]
         public void TruncateString_MaxLength(string input, int maxLength, string expected)
         {
@@ -131,6 +128,16 @@ namespace StringManipulation.Tests
             var result = strOperations.TruncateString(input, maxLength);
 
             Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void TruncateString()
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.TruncateString("Hello", 3);
+
+            Assert.Equal("Hel", result);
         }
 
         [Fact]
