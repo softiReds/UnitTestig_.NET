@@ -209,5 +209,15 @@ namespace StringManipulation.Tests
 
             Assert.Equal("Reading file", result);
         }
+
+        [Fact]
+        public void Pluralize()
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.Pluralize("car");
+
+            Assert.Equal("cars", result);
+        }
     }
 }
