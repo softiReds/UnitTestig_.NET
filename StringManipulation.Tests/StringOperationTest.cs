@@ -11,7 +11,7 @@ namespace StringManipulation.Tests
 {
     public class StringOperationTest
     {
-        [Fact(Skip = "Esta prueba no es valida en este momento, TICKET-001")]   //  Skip = "message" -> Omite la ejecución de la prueba
+        //  [Fact(Skip = "Esta prueba no es valida en este momento, TICKET-001")]   //  Skip = "message" -> Omite la ejecución de la prueba
         public void ConcatenateStrings()
         {
             //  Arrange
@@ -25,6 +25,16 @@ namespace StringManipulation.Tests
                                     //      NotNull(result) -> Valida que un resultado no sea null
             Assert.NotEmpty(result);    //  NotEmpty(result) -> Valida que el resultado no sera vacio
             Assert.Equal("Hello World!", result);   //  Equal(expectedResult, result) -> Permite enviar un resultado esperado para un metodo y el resultado real devuelto por el metodo para evaluar si ambos son iguales
+        }
+
+        [Fact]
+        public void ReverseString()
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.ReverseString("hello");
+
+            Assert.Equal(result, "olleh");
         }
 
         /*
@@ -88,6 +98,39 @@ namespace StringManipulation.Tests
             var strOperations = new StringOperations();
 
             Assert.ThrowsAny<ArgumentNullException>(() => strOperations.GetStringLength(null)); //  ThrowsAny<Exception>(() => object.method()) -> Verifica que el metodo arroje una excepcion
+        }
+
+        //[Fact]
+        //public void TruncateString()
+        //{
+        //    var strOperations = new StringOperations();
+
+        //    var result = strOperations.TruncateString();
+        //}
+
+        [Theory]
+        [InlineData(null, 1, null)]
+        [InlineData("Hello", 3, "Hel")]
+        [InlineData("Hello", 10, "Hello")]
+        public void TruncateString_NullMaxLength(string input, int maxLength, string expected)
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.TruncateString(input, maxLength);
+
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData("Hello", 3, "Hel")]
+        [InlineData("Hello", 10, "Hello")]
+        public void TruncateString_MaxLength(string input, int maxLength, string expected)
+        {
+            var strOperations = new StringOperations();
+
+            var result = strOperations.TruncateString(input, maxLength);
+
+            Assert.Equal(expected, result);
         }
 
         [Fact]
