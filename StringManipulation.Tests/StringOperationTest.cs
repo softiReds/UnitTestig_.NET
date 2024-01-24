@@ -12,6 +12,7 @@ namespace StringManipulation.Tests
     public class StringOperationTest
     {
         //  [Fact(Skip = "Esta prueba no es valida en este momento, TICKET-001")]   //  Skip = "message" -> Omite la ejecución de la prueba
+        [Fact]
         public void ConcatenateStrings()
         {
             //  Arrange
